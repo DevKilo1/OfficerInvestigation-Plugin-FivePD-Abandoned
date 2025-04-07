@@ -43,6 +43,10 @@ public class Collision() : BaseIncident<Collision>()
             }
 
             API.CopyVehicleDamages(v.Handle, veh.Handle);
+            var vel = Game.PlayerPed.CurrentVehicle.Velocity;
+            var offset = veh.GetPositionOffset(Game.PlayerPed.CurrentVehicle.Position);
+            API.ApplyForceToEntity(veh.Handle, 1, vel.X, vel.Y, vel.Z, offset.X, offset.Y, offset.Z, 0, true, true,
+                true, false, true);
             veh.Mods.Livery = v.Mods.Livery;
             veh.Mods.ColorCombination = v.Mods.ColorCombination;
             Vector3 pos = v.Position;
